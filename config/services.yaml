@@ -1,0 +1,23 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider:
+    arguments:
+      $lifetime: '%env(RDS_TOKEN_LIFETIME_MINUTES)%'
+
+  Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProviderCacheDecorator:
+    decorates: Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider
+    arguments:
+      $tokenProvider: '@.inner'
+      $cacheStorage: '@Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface'
+      $ttl: '%env(RDS_TOKEN_CACHE_LIFETIME_SECONDS)%'
+
+  Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamMiddleware:
+    tags: [ 'doctrine.middleware' ]
+    arguments:
+      - '@Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProviderCacheDecorator'
+      - '%env(AWS_REGION)%'
+      - '%env(USE_IAM)%'
