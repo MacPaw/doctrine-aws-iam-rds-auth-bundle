@@ -2,11 +2,18 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
-    public: false
+    public: true
+
+  Macpaw\DoctrineAwsIamRdsAuthBundle\Factory\AuthTokenGeneratorFactory: ~
+
+  rds.authTokenGenerator:
+    class: Aws\Rds\AuthTokenGenerator
+    factory: '@Macpaw\DoctrineAwsIamRdsAuthBundle\Factory\AuthTokenGeneratorFactory'
 
   Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider:
     arguments:
       $lifetime: '%env(RDS_TOKEN_LIFETIME_MINUTES)%'
+      $generator: '@rds.authTokenGenerator'
 
   Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProviderCacheDecorator:
     decorates: Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider
