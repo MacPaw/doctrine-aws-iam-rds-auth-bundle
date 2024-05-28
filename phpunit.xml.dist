@@ -15,21 +15,19 @@
         <server name="SYMFONY_PHPUNIT_VERSION" value="10"/>
         <server name="RDS_TOKEN_LIFETIME_MINUTES" value="10"/>
         <server name="RDS_TOKEN_CACHE_LIFETIME_SECONDS" value="3600"/>
-        <server name="KERNEL_CLASS" value="App\Kernel"/>
+        <server name="APP_SECRET" value="someString!"/>
         <server name="AWS_REGION" value="us-west-1"/>
         <server name="USE_IAM" value="true"/>
+        <server name="KERNEL_CLASS" value="App\Kernel"/>
         <!-- https://github.com/phpDocumentor/TypeResolver/issues/148#issuecomment-1005542099 -->
         <server name="SYMFONY_PHPUNIT_REQUIRE" value="phpdocumentor/type-resolver:1.6"/>
     </php>
     <testsuites>
         <testsuite name="unit">
-            <directory>tests/PHPUnit/Unit</directory>
+            <directory>tests/Unit</directory>
         </testsuite>
         <testsuite name="functional">
-            <directory>tests/PHPUnit/Functional</directory>
-        </testsuite>
-        <testsuite name="integration">
-            <directory>tests/PHPUnit/Integration</directory>
+            <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
     <source>
@@ -37,13 +35,6 @@
             <directory>./src</directory>
         </include>
         <exclude>
-            <directory suffix="Exception.php">src</directory>
-            <directory>src/Infrastructure/Migrations</directory>
-            <directory>src/Infrastructure/DataFixtures</directory>
-            <directory>src/Infrastructure/Exception</directory>
-            <directory>src/Component/DB/Exception</directory>
-            <directory>src/Domain/Exception</directory>
-            <file>src/Kernel.php</file>
         </exclude>
     </source>
 
@@ -53,7 +44,7 @@
               ignoreDeprecatedCodeUnits="true"
               disableCodeCoverageIgnore="true">
         <report>
-            <php outputFile="reports/merge/phpunit.cov"/>
+            <clover outputFile="clover.xml"/>
         </report>
     </coverage>
 </phpunit>

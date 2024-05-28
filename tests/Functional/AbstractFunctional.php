@@ -8,7 +8,7 @@ use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Container;
 
-abstract class AbstractFunctionalTest extends KernelTestCase
+abstract class AbstractFunctional extends KernelTestCase
 {
     protected static function getKernelClass(): string
     {

@@ -12,13 +12,13 @@ use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorage;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecorator;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamMiddleware;
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\Functional\AbstractFunctionalTest;
+use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\Functional\AbstractFunctional;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-final class DIExtensionTest extends AbstractFunctionalTest
+final class DIExtension extends AbstractFunctional
 {
     public function testRdsTokenProviderInit(): void
     {
