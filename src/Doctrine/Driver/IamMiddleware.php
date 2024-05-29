@@ -8,12 +8,12 @@ use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Driver\Middleware;
 
-class IamMiddleware implements Middleware
+readonly class IamMiddleware implements Middleware
 {
     public function __construct(
-        private readonly TokenProviderInterface $tokenProvider,
-        private readonly string $region,
-        private readonly bool $useIam,
+        private TokenProviderInterface $tokenProvider,
+        private string $region,
+        private bool $useIam,
     ) {
     }
 

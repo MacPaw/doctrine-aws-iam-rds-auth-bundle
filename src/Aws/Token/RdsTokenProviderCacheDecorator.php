@@ -6,14 +6,14 @@ namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token;
 
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface;
 
-class RdsTokenProviderCacheDecorator implements TokenProviderInterface
+final readonly class RdsTokenProviderCacheDecorator implements TokenProviderInterface
 {
     private const string CACHE_KEY_PREFIX = 'rds_token_';
 
     public function __construct(
-        private readonly TokenProviderInterface $tokenProvider,
-        private readonly CacheStorageInterface $cacheStorage,
-        private readonly int $ttl
+        private TokenProviderInterface $tokenProvider,
+        private CacheStorageInterface $cacheStorage,
+        private int $ttl
     ) {
     }
 
