@@ -14,12 +14,12 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 
-class IamDecorator implements Driver
+readonly class IamDecorator implements Driver
 {
     public function __construct(
-        private readonly Driver $subject,
-        private readonly TokenProviderInterface $tokenProvider,
-        private readonly string $region,
+        private Driver $subject,
+        private TokenProviderInterface $tokenProvider,
+        private string $region,
     ) {
     }
 

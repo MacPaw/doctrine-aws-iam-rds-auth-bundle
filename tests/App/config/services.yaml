@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    public: true
+    autowire: true
+    autoconfigure: true
+
+  test.service_container:
+    alias: 'service_container'
+
+  Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface:
+    class: Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorage
+    arguments:
+      $cacheAdapter: '@cache.app'
+
+parameters:
+  'kernel.secret': '%env(APP_SECRET)%'

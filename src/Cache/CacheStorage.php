@@ -7,7 +7,7 @@ namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Cache;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 
-class CacheStorage implements CacheStorageInterface
+final readonly class CacheStorage implements CacheStorageInterface
 {
     public function __construct(private AdapterInterface $cacheAdapter)
     {
