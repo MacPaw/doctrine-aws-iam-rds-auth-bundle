@@ -11,7 +11,7 @@ $doctrineVersion = class_exists('Doctrine\DBAL\ServerVersionProvider') ? '3.0' :
 if ('3.0' === $doctrineVersion) {
     $skipPath = __DIR__ . '/../src/Doctrine/Driver/IamDecorator.php';
 } else {
-    $skipPath = __DIR__ . '/../src/Doctrine/Driver/IamDecorator.php';
+    $skipPath = __DIR__ . '/../src/Doctrine/Driver/IamDecoratorDoctrine30.php';
 }
 
 $neonFile = __DIR__ . '/../phpstan.neon';
