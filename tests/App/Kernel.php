@@ -6,7 +6,7 @@ namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\App;
 
 use Macpaw\DoctrineAwsIamRdsAuthBundle\DependencyInjection\DoctrineAwsIamRdsAuthExtension;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\DoctrineAwsIamRdsAuthBundle;
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\App\dependencyInjection\PublicCompilerPass;
+use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\App\DependencyInjection\PublicCompilerPass;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
