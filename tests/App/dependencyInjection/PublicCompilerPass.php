@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\App\DependencyInjection;
+namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\App\dependencyInjection;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
