@@ -14,9 +14,10 @@ jobs:
         php:
           - '8.3'
         coverage: ['none']
-        doctrine-orm-versions:
-          - '^2.17'
+        doctrine-dbal-versions:
+          - '^2.0'
           - '^3.0'
+          - '^4.0'
         symfony-versions:
           - '6.4.*'
           - '7.0.*'
@@ -24,15 +25,15 @@ jobs:
           - description: 'Log Code Coverage'
             php: '8.3'
             symfony-versions: '^7.0'
-            doctrine-orm-versions: '^3.0'
+            doctrine-dbal-versions: '^3.0'
             coverage: xdebug
           - description: 'Log Code Coverage'
             php: '8.3'
             symfony-versions: '^7.0'
-            doctrine-orm-versions: '^2.17'
+            doctrine-dbal-versions: '^2.17'
             coverage: xdebug
 
-    name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} Doctrine ${{ matrix.doctrine-orm-versions }} ${{ matrix.description }}
+    name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} Doctrine DBAL ${{ matrix.doctrine-dbal-versions }} ${{ matrix.description }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -70,7 +71,7 @@ jobs:
           composer require symfony/dependency-injection:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require symfony/http-kernel:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require symfony/cache:${{ matrix.symfony-versions }} --no-update --no-scripts
-          composer require doctrine/orm:${{ matrix.doctrine-orm-versions }} --no-update --no-scripts -W
+          composer require doctrine/dbal:${{ matrix.doctrine-dbal-versions }} --no-update --no-scripts -W
           composer require --dev symfony/yaml:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require --dev symfony/phpunit-bridge:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require --dev symfony/framework-bundle:${{ matrix.symfony-versions }} --no-update --no-scripts
