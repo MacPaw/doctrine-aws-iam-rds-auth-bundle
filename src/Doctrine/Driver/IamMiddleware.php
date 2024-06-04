@@ -17,7 +17,7 @@ readonly class IamMiddleware implements Middleware
     ) {
     }
 
-    public function wrap(Driver $driver): IamDecoratorInterface
+    public function wrap(Driver $driver): Driver
     {
         if ($this->useIam) {
             if (interface_exists('Doctrine\DBAL\ServerVersionProvider')) {
