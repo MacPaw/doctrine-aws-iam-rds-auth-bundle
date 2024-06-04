@@ -23,7 +23,7 @@ use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\AbstractDoctrineTestCase;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class IamDecoratorDoctrine30Test extends AbstractDoctrineTestCase
+final class IamDecoratorDoctrine40Test extends AbstractDoctrineTestCase
 {
     private const string ENDPOINT = 'endpoint';
     private const string REGION = 'us-west-1';
