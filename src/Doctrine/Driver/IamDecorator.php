@@ -6,11 +6,12 @@ namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\Exception as DriverException;
 use Doctrine\DBAL\Driver\API\ExceptionConverter;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
+use Doctrine\DBAL\Driver\Exception as DriverException;
 use Doctrine\DBAL\Exception\ConnectionException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 
@@ -46,7 +47,7 @@ readonly class IamDecorator implements IamDecoratorInterface
                     "$host:$port",
                     $this->region,
                     $user,
-                    true
+                    true,
                 );
 
                 return $this->subject->connect($params);
@@ -54,21 +55,6 @@ readonly class IamDecorator implements IamDecoratorInterface
 
             throw $e;
         }
-    }
-
-    public function getDatabasePlatform(): AbstractPlatform
-    {
-        return $this->subject->getDatabasePlatform();
-    }
-
-    public function getSchemaManager(Connection $conn, AbstractPlatform $platform): AbstractSchemaManager
-    {
-        return $this->subject->getSchemaManager($conn, $platform);
-    }
-
-    public function getExceptionConverter(): ExceptionConverter
-    {
-        return $this->subject->getExceptionConverter();
     }
 
     private function isConnectionException(\Throwable $e): bool
@@ -80,5 +66,23 @@ readonly class IamDecorator implements IamDecoratorInterface
         }
 
         return false;
+    }
+
+    public function getExceptionConverter(): ExceptionConverter
+    {
+        return $this->subject->getExceptionConverter();
+    }
+
+    public function getDatabasePlatform(): AbstractPlatform
+    {
+        return $this->subject->getDatabasePlatform();
+    }
+
+    /**
+     * @return AbstractSchemaManager<PostgreSQLPlatform>
+     */
+    public function getSchemaManager(Connection $conn, AbstractPlatform $platform): AbstractSchemaManager
+    {
+        return $this->subject->getSchemaManager($conn, $platform);
     }
 }
