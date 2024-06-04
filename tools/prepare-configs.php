@@ -6,7 +6,7 @@ use Nette\Neon\Neon;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$doctrineVersion = class_exists('Doctrine\DBAL\ServerVersionProvider') ? '3.0' : '2';
+$doctrineVersion = interface_exists('Doctrine\DBAL\ServerVersionProvider') ? '3.0' : '2';
 
 if ('3.0' === $doctrineVersion) {
     $skipPath = __DIR__ . '/../src/Doctrine/Driver/IamDecorator.php';
