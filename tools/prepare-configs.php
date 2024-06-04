@@ -6,12 +6,18 @@ use Nette\Neon\Neon;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$doctrineVersion = interface_exists('Doctrine\DBAL\ServerVersionProvider') ? '4.0' : '2';
+enum DoctrineType {
+    case doctrine3;
+    case doctrine4;
+}
 
-if ('4.0' === $doctrineVersion) {
+$doctrineVersion = interface_exists('Doctrine\DBAL\ServerVersionProvider') ?
+    DoctrineType::doctrine4 : DoctrineType::doctrine3;
+
+if (DoctrineType::doctrine4 === $doctrineVersion) {
     $skipPath = __DIR__ . '/../src/Doctrine/Driver/IamDecorator.php';
 } else {
-    $skipPath = __DIR__ . '/../src/Doctrine/Driver/IamDecoratorDoctrine30.php';
+    $skipPath = __DIR__ . '/../src/Doctrine/Driver/IamDecoratorDoctrine40.php';
 }
 
 $neonFile = __DIR__ . '/../phpstan.neon';
