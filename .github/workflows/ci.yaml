@@ -14,9 +14,18 @@ jobs:
         php:
           - '8.3'
         coverage: ['none']
+        doctrine-orm-versions:
+          - '^2.17'
+          - '^3.0'
         symfony-versions:
           - '6.4.*'
           - '7.0.*'
+        include:
+          - description: 'Log Code Coverage'
+            php: '8.3'
+            symfony-versions: '^7.0'
+            doctrine-orm-versions: '^3.0'
+            coverage: xdebug
 
     name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} ${{ matrix.description }}
     steps:
@@ -56,6 +65,7 @@ jobs:
           composer require symfony/dependency-injection:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require symfony/http-kernel:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require symfony/cache:${{ matrix.symfony-versions }} --no-update --no-scripts
+          composer require doctrine/orm:${{ matrix.doctrine-orm-versions }} --no-update --no-scripts
           composer require --dev symfony/yaml:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require --dev symfony/phpunit-bridge:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require --dev symfony/framework-bundle:${{ matrix.symfony-versions }} --no-update --no-scripts
