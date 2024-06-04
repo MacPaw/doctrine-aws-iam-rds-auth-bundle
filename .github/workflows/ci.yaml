@@ -15,7 +15,6 @@ jobs:
           - '8.3'
         coverage: ['none']
         doctrine-dbal-versions:
-          - '^2.0'
           - '^3.0'
           - '^4.0'
         symfony-versions:
