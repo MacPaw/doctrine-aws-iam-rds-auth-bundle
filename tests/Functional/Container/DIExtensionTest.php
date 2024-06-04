@@ -7,14 +7,9 @@ namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\Functional\Container;
 use Aws\Rds\AuthTokenGenerator;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProviderCacheDecorator;
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorage;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface;
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecorator;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamMiddleware;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\Functional\AbstractFunctional;
-use PHPUnit\Framework\Attributes\Depends;
-use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 

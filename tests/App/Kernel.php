@@ -30,6 +30,7 @@ final class Kernel extends BaseKernel
     {
         $builder = parent::getContainerBuilder();
         $builder->addCompilerPass(new PublicCompilerPass());
+//        $builder->registerExtension(new DoctrineAwsIamRdsAuthExtension());
 
         return $builder;
     }

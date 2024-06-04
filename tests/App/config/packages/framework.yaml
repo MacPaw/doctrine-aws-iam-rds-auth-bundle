@@ -3,8 +3,14 @@ framework:
   secret: '%env(APP_SECRET)%'
   #csrf_protection: true
   handle_all_throwables: true
+  http_method_override: false
   php_errors:
     log: true
+
+  session:
+    handler_id: null
+    cookie_samesite: lax
+    cookie_secure: true
 
   property_access: true
 
