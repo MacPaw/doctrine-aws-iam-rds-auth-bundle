@@ -32,7 +32,7 @@ jobs:
             doctrine-orm-versions: '^2.17'
             coverage: xdebug
 
-    name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} ${{ matrix.description }}
+    name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} Doctrine ${{ matrix.doctrine-orm-versions }} ${{ matrix.description }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -63,7 +63,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.php }}-${{ matrix.symfony-versions }}-composer-${{ hashFiles('composer.json') }}
           restore-keys: ${{ runner.os }}-${{ matrix.php }}-${{ matrix.symfony-versions }}-composer
 
-      - name: Update Symfony version
+      - name: Update package versions
         if: matrix.symfony-versions != ''
         run: |
           composer require symfony/config:${{ matrix.symfony-versions }} --no-update --no-scripts
