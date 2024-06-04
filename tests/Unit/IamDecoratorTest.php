@@ -19,12 +19,11 @@ use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProviderCacheDecorator;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecorator;
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\AbstractDoctrineTestCase;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-final class IamDecoratorTest extends AbstractDoctrineTestCase
+final class IamDecoratorTest extends TestCase
 {
     private const string ENDPOINT = 'endpoint';
     private const string REGION = 'us-west-1';
@@ -42,9 +41,6 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
      */
     public function testSuccessfullyConnected(): array
     {
-        if ($this->isDoctrine30()) {
-            $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
-        }
         $params = [
             'host' => self::ENDPOINT,
             'port' => 5432,
@@ -104,10 +100,6 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
 
     public function testSuccessfullyReConnected(): void
     {
-        if ($this->isDoctrine30()) {
-            $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
-        }
-
         $params = [
             'host' => self::ENDPOINT,
             'port' => 5432,
@@ -189,10 +181,6 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
 
     public function testErrorException(): void
     {
-        if ($this->isDoctrine30()) {
-            $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
-        }
-
         $params = [
             'host' => self::ENDPOINT,
             'port' => 5432,
@@ -258,10 +246,6 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
     #[Depends(methodName: 'testSuccessfullyConnected')]
     public function testGetDatabasePlatform(array $data): void
     {
-        if ($this->isDoctrine30()) {
-            $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
-        }
-
         /** @var Driver&MockObject $driver */
         $driver = $data['driver'];
         /** @var IamDecorator&MockObject $iam */
@@ -283,10 +267,6 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
     #[Depends(methodName: 'testSuccessfullyConnected')]
     public function testGetExceptionConverter(array $data): void
     {
-        if ($this->isDoctrine30()) {
-            $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
-        }
-
         /** @var Driver&MockObject $driver */
         $driver = $data['driver'];
         /** @var IamDecorator&MockObject $iam */

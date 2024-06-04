@@ -1,8 +1,5 @@
 parameters:
-	level: max
-	paths:
-		- src
-
-	ignoreErrors:
-		-
-			identifier: missingType.generics
+    checkGenericClassInNonGenericObjectType: false
+    level: max
+    paths:
+        - src
