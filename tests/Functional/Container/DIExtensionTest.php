@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\Functional\Container;
 
 use Aws\Rds\AuthTokenGenerator;
+use Doctrine\DBAL\Driver;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProviderCacheDecorator;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface;
+use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecorator;
+use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecoratorDoctrine30;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamMiddleware;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\Functional\AbstractFunctional;
 use ReflectionClass;
@@ -63,6 +66,28 @@ final class DIExtensionTest extends AbstractFunctional
             $tokenProvider,
             $prop->getValue($iamDecorator),
         );
+    }
+
+    public function testIamMiddleware(): void
+    {
+        $middleware = self::getContainer()->get(IamMiddleware::class);
+        $instance = $middleware->wrap(
+            $this->createMock(Driver::class),
+        );
+
+        $this->assertInstanceOf(
+            !$this->isDoctrine30() ? IamDecorator::class : IamDecoratorDoctrine30::class,
+            $instance,
+        );
+    }
+
+    private function isDoctrine30(): bool
+    {
+        if (!function_exists('interface_exists')) {
+            return class_exists('Doctrine\DBAL\ServerVersionProvider');
+        }
+
+        return interface_exists('Doctrine\DBAL\ServerVersionProvider');
     }
 
     protected function setUp(): void
