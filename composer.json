@@ -27,7 +27,9 @@
         "phpunit/phpunit": "^11.1",
         "symfony/phpunit-bridge": "^7.0",
         "symfony/framework-bundle": "^6.4 || ^7.0",
-        "symfony/yaml": "^6.4 || ^7.0"
+        "symfony/yaml": "^6.4 || ^7.0",
+        "nette/neon": "^3.4",
+        "doctrine/doctrine-bundle": "^2.12"
     },
     "config": {
         "allow-plugins": {

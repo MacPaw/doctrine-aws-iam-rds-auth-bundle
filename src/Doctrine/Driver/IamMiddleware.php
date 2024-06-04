@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver;
 
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Driver\Middleware;
+use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 
 readonly class IamMiddleware implements Middleware
 {
@@ -17,10 +17,22 @@ readonly class IamMiddleware implements Middleware
     ) {
     }
 
-    public function wrap(Driver $driver): Driver
+    public function wrap(Driver $driver): IamDecoratorInterface
     {
         if ($this->useIam) {
-            return new IamDecorator($driver, $this->tokenProvider, $this->region);
+            if (interface_exists('Doctrine\DBAL\ServerVersionProvider')) {
+                return new IamDecoratorDoctrine30(
+                    $driver,
+                    $this->tokenProvider,
+                    $this->region,
+                );
+            }
+
+            return new IamDecorator(
+                $driver,
+                $this->tokenProvider,
+                $this->region,
+            );
         }
 
         return $driver;

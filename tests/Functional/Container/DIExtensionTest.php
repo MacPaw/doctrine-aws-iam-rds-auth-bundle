@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-final class DIExtension extends AbstractFunctional
+final class DIExtensionTest extends AbstractFunctional
 {
     public function testRdsTokenProviderInit(): void
     {

@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\Exception as DriverException;
 use Doctrine\DBAL\Driver\API\ExceptionConverter;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
+use Doctrine\DBAL\Driver\Exception as DriverException;
 use Doctrine\DBAL\Exception\ConnectionException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\DBAL\ServerVersionProvider;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 
-readonly class IamDecorator implements IamDecoratorInterface
+readonly class IamDecoratorDoctrine30 implements IamDecoratorInterface
 {
     public function __construct(
         private Driver $subject,
@@ -56,14 +55,9 @@ readonly class IamDecorator implements IamDecoratorInterface
         }
     }
 
-    public function getDatabasePlatform(): AbstractPlatform
+    public function getDatabasePlatform(ServerVersionProvider $versionProvider): AbstractPlatform
     {
-        return $this->subject->getDatabasePlatform();
-    }
-
-    public function getSchemaManager(Connection $conn, AbstractPlatform $platform): AbstractSchemaManager
-    {
-        return $this->subject->getSchemaManager($conn, $platform);
+        return $this->subject->getDatabasePlatform($versionProvider);
     }
 
     public function getExceptionConverter(): ExceptionConverter
