@@ -11,7 +11,7 @@ use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProviderCacheDecorator;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Cache\CacheStorageInterface;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecorator;
-use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecoratorDoctrine30;
+use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamDecoratorDoctrine40;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Doctrine\Driver\IamMiddleware;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Tests\Functional\AbstractFunctional;
 use ReflectionClass;
@@ -77,7 +77,7 @@ final class DIExtensionTest extends AbstractFunctional
         $instance = $middleware->wrap($driver);
 
         $this->assertInstanceOf(
-            !$this->isDoctrine30() ? IamDecorator::class : IamDecoratorDoctrine30::class,
+            !$this->isDoctrine40() ? IamDecorator::class : IamDecoratorDoctrine40::class,
             $instance,
         );
 
@@ -93,7 +93,7 @@ final class DIExtensionTest extends AbstractFunctional
         );
     }
 
-    private function isDoctrine30(): bool
+    private function isDoctrine40(): bool
     {
         if (!function_exists('interface_exists')) {
             return class_exists('Doctrine\DBAL\ServerVersionProvider');

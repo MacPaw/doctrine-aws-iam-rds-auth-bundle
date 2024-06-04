@@ -29,7 +29,7 @@ jobs:
           - description: 'Log Code Coverage'
             php: '8.3'
             symfony-versions: '^7.0'
-            doctrine-dbal-versions: '^2.17'
+            doctrine-dbal-versions: '^4.0'
             coverage: xdebug
 
     name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} Doctrine DBAL ${{ matrix.doctrine-dbal-versions }} ${{ matrix.description }}

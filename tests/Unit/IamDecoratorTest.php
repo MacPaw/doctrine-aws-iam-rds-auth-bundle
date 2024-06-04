@@ -42,7 +42,7 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
      */
     public function testSuccessfullyConnected(): array
     {
-        if ($this->isDoctrine30()) {
+        if ($this->isDoctrine40()) {
             $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
         }
         $params = [
@@ -104,7 +104,7 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
 
     public function testSuccessfullyReConnected(): void
     {
-        if ($this->isDoctrine30()) {
+        if ($this->isDoctrine40()) {
             $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
         }
 
@@ -189,7 +189,7 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
 
     public function testErrorException(): void
     {
-        if ($this->isDoctrine30()) {
+        if ($this->isDoctrine40()) {
             $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
         }
 
@@ -258,7 +258,7 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
     #[Depends(methodName: 'testSuccessfullyConnected')]
     public function testGetDatabasePlatform(array $data): void
     {
-        if ($this->isDoctrine30()) {
+        if ($this->isDoctrine40()) {
             $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
         }
 
@@ -283,7 +283,7 @@ final class IamDecoratorTest extends AbstractDoctrineTestCase
     #[Depends(methodName: 'testSuccessfullyConnected')]
     public function testGetExceptionConverter(array $data): void
     {
-        if ($this->isDoctrine30()) {
+        if ($this->isDoctrine40()) {
             $this->markTestSkipped('Test is not compatible with Doctrine 3.0');
         }
 

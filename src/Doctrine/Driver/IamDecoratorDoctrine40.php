@@ -13,7 +13,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\ServerVersionProvider;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 
-readonly class IamDecoratorDoctrine30 implements IamDecoratorInterface
+readonly class IamDecoratorDoctrine40 implements IamDecoratorInterface
 {
     public function __construct(
         private Driver $subject,

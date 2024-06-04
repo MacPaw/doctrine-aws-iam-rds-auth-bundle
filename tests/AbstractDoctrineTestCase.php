@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractDoctrineTestCase extends TestCase
 {
-    protected function isDoctrine30(): bool
+    protected function isDoctrine40(): bool
     {
         if (!function_exists('interface_exists')) {
             return class_exists('Doctrine\DBAL\ServerVersionProvider');

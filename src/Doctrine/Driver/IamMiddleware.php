@@ -21,7 +21,7 @@ readonly class IamMiddleware implements Middleware
     {
         if ($this->useIam) {
             if (interface_exists('Doctrine\DBAL\ServerVersionProvider')) {
-                return new IamDecoratorDoctrine30(
+                return new IamDecoratorDoctrine40(
                     $driver,
                     $this->tokenProvider,
                     $this->region,
