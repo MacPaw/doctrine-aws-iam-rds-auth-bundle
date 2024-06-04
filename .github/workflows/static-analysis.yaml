@@ -46,7 +46,6 @@ jobs:
         uses: shivammathur/setup-php@v2
 
       - name: Update package versions
-        if: matrix.symfony-versions != ''
         run: |
           composer require doctrine/orm:${{ matrix.doctrine-orm-versions }} --no-update --no-scripts -W
 
