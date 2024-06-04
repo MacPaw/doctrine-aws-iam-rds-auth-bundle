@@ -14,7 +14,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\TokenProviderInterface;
 
-readonly class IamDecorator implements IamDecoratorInterface
+readonly class IamDecorator implements Driver
 {
     public function __construct(
         private Driver $subject,
