@@ -19,12 +19,25 @@ jobs:
       - name: Install dependencies
         run: composer install --no-progress --no-interaction --prefer-dist
 
+      - name: Update configs
+        run: php tools/prepare-configs.php
+
       - name: Run script
         run: vendor/bin/phpcs
 
   phpstan:
-    name: PHPStan
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - '8.3'
+        coverage: [ 'none' ]
+        doctrine-dbal-versions:
+          - '^3.0'
+          - '^4.0'
+
+    name: Static analyse with PHP ${{ matrix.php }} Doctrine DBAL ${{ matrix.doctrine-dbal-versions }} ${{ matrix.description }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -32,11 +45,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
 
+      - name: Update package versions
+        run: |
+          composer require doctrine/dbal:${{ matrix.doctrine-dbal-versions }} --no-update --no-scripts -W
+
       - name: Install dependencies
         run: composer install --no-progress --no-interaction --prefer-dist
 
       - name: Run script
-        run: vendor/bin/phpstan analyse
+        run: |
+          php tools/prepare-configs.php;
+          vendor/bin/phpstan analyse
 
   composer-validate:
     name: Composer validate

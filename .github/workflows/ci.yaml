@@ -14,11 +14,25 @@ jobs:
         php:
           - '8.3'
         coverage: ['none']
+        doctrine-dbal-versions:
+          - '^3.0'
+          - '^4.0'
         symfony-versions:
           - '6.4.*'
           - '7.0.*'
+        include:
+          - description: 'Log Code Coverage'
+            php: '8.3'
+            symfony-versions: '^7.0'
+            doctrine-dbal-versions: '^3.0'
+            coverage: xdebug
+          - description: 'Log Code Coverage'
+            php: '8.3'
+            symfony-versions: '^7.0'
+            doctrine-dbal-versions: '^4.0'
+            coverage: xdebug
 
-    name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} ${{ matrix.description }}
+    name: Test with PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }} Doctrine DBAL ${{ matrix.doctrine-dbal-versions }} ${{ matrix.description }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -49,13 +63,14 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.php }}-${{ matrix.symfony-versions }}-composer-${{ hashFiles('composer.json') }}
           restore-keys: ${{ runner.os }}-${{ matrix.php }}-${{ matrix.symfony-versions }}-composer
 
-      - name: Update Symfony version
+      - name: Update package versions
         if: matrix.symfony-versions != ''
         run: |
           composer require symfony/config:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require symfony/dependency-injection:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require symfony/http-kernel:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require symfony/cache:${{ matrix.symfony-versions }} --no-update --no-scripts
+          composer require doctrine/dbal:${{ matrix.doctrine-dbal-versions }} --no-update --no-scripts -W
           composer require --dev symfony/yaml:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require --dev symfony/phpunit-bridge:${{ matrix.symfony-versions }} --no-update --no-scripts
           composer require --dev symfony/framework-bundle:${{ matrix.symfony-versions }} --no-update --no-scripts
@@ -64,7 +79,9 @@ jobs:
         run: composer install
 
       - name: Run PHPUnit tests
-        run: XDEBUG_MODE=coverage vendor/bin/phpunit
+        run: |
+          XDEBUG_MODE=off php tools/prepare-configs.php
+          XDEBUG_MODE=coverage vendor/bin/phpunit
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
