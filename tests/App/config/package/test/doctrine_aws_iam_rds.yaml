@@ -1,7 +1,0 @@
-doctrine_aws_iam_rds:
-
-services:
-  Macpaw\DoctrineAwsIamRdsAuthBundle\Aws\Token\RdsTokenProvider:
-    public: true
-    arguments:
-      [ '@rds.authTokenGenerator', '@?' ]
